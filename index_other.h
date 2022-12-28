@@ -29,6 +29,7 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
         <label for="nav-toggle-cb" id="nav-toggle" style="float:left;" title="Settings">&#9776;&nbsp;</label>
         <button id="swap-viewer" style="float:left;" title="Swap to full feature viewer">Full</button>
         <button id="get-still" style="float:left;">Get Still</button>
+        <button id="toggle-flash" style="float:left;">Flash</button>
         <button id="toggle-stream" style="float:left;" class="hidden">Start Stream</button>
         <div id="wait-settings" style="float:left;" class="loader" title="Waiting for camera settings to load"></div>
       </div>
@@ -88,6 +89,8 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
     const view = document.getElementById('stream')
     const viewContainer = document.getElementById('stream-container')
     const stillButton = document.getElementById('get-still')
+    const flashButton = document.getElementById('toggle-flash')
+    const flashElement = document.getElementById('lamp')
     const streamButton = document.getElementById('toggle-stream')
     const closeButton = document.getElementById('close-stream')
     const swapButton = document.getElementById('swap-viewer')
@@ -214,6 +217,8 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
     // Put some helpful text on the 'Still' button
     stillButton.setAttribute("title", `Capture a still image :: ${baseHost}/capture`);
 
+    flashButton.setAttribute("title","Toggle flash on/of");
+
     const stopStream = () => {
       window.stop();
       streamButton.innerHTML = 'Start Stream';
@@ -257,6 +262,15 @@ const uint8_t index_simple_html[] = R"=====(<!doctype html>
       view.src = `${baseHost}/capture?_cb=${Date.now()}`;
       view.scrollIntoView(false);
       show(viewContainer);
+    }
+
+    flashButton.onclick = () => {
+      //TODO
+      let current_value;
+      current_value=flashElement.value;
+      if(current_value==0){flashElement.value=100;}
+      else{flashElement.value=0;}
+      updateConfig(flashElement);
     }
 
     closeButton.onclick = () => {

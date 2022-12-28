@@ -22,7 +22,7 @@
  *    just replace your ssid and password in the line below.
  */
 
-struct station stationList[] = {{"my_ssid","my_password", true}};
+struct station stationList[] = {{"Red 2","hn6hvVspkppy", true}};
 
 /*
  * You can extend the stationList[] above with additional SSID+Password pairs

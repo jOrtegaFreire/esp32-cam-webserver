@@ -71,7 +71,7 @@ const uint8_t index_ov2640_html[] = R"=====(<!doctype html>
                 <div class="range-min">Low</div>
                 <!-- Note; the following element is 'flipped' in CSS so that it slides from High to Low
                      As a result the 'min' and 'max' values are reversed here too -->
-                <input type="range" id="quality" min="6" max="63" value="10" class="default-action">
+                <input type="range" id="quality" min="6" max="63" value="63" class="default-action">
                 <div class="range-max">High</div>
               </div>
               <div class="input-group" id="set-xclk-group" title="Camera Bus Clock Frequency&#013;Increasing this will raise the camera framerate and capture speed&#013;&#013;Raising too far will result in visual artifacts and/or incomplete frames&#013;This setting can vary a lot between boards, budget boards typically need lower values">

@@ -152,7 +152,7 @@ int sensorPID;
 // Originally: config.xclk_freq_mhz = 20000000, but this lead to visual artifacts on many modules.
 // See https://github.com/espressif/esp32-camera/issues/150#issuecomment-726473652 et al.
 #if !defined (XCLK_FREQ_MHZ)
-    unsigned long xclk = 8;
+    unsigned long xclk = 20;
 #else
     unsigned long xclk = XCLK_FREQ_MHZ;
 #endif
@@ -336,10 +336,10 @@ void StartCamera() {
     config.xclk_freq_hz = xclk * 1000000;
     config.pixel_format = PIXFORMAT_JPEG;
     // Low(ish) default framesize and quality
-    config.frame_size = FRAMESIZE_SVGA;
-    config.jpeg_quality = 12;
-    config.fb_location = CAMERA_FB_IN_PSRAM;
-    config.fb_count = 2;
+    config.frame_size = FRAMESIZE_VGA;
+    config.jpeg_quality = 6;
+    config.fb_location = CAMERA_FB_IN_DRAM;
+    config.fb_count = 1;
     config.grab_mode = CAMERA_GRAB_LATEST;
 
     #if defined(CAMERA_MODEL_ESP_EYE)
@@ -349,6 +349,11 @@ void StartCamera() {
 
     // camera init
     esp_err_t err = esp_camera_init(&config);
+    Serial.printf("\r\nJpeg quality: ");
+    Serial.print(config.jpeg_quality);
+    Serial.printf("\r\n");
+
+
     if (err != ESP_OK) {
         delay(100);  // need a delay here or the next serial o/p gets missed
         Serial.printf("\r\n\r\nCRITICAL FAILURE: Camera sensor failed to initialise.\r\n\r\n");
@@ -642,13 +647,13 @@ void setup() {
     Serial.println();
 
     // Warn if no PSRAM is detected (typically user error with board selection in the IDE)
-    if(!psramFound()){
-        Serial.println("\r\nFatal Error; Halting");
-        while (true) {
-            Serial.println("No PSRAM found; camera cannot be initialised: Please check the board config for your module.");
-            delay(5000);
-        }
-    }
+    // if(!psramFound()){
+    //     Serial.println("\r\nFatal Error; Halting");
+    //     while (true) {
+    //         Serial.println("No PSRAM found; camera cannot be initialised: Please check the board config for your module.");
+    //         delay(5000);
+    //     }
+    // }
 
     if (stationCount == 0) {
         Serial.println("\r\nFatal Error; Halting");
