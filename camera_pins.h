@@ -30,6 +30,7 @@
   #define LED_ON           LOW // - Pin is inverted.
   #define LED_OFF         HIGH //
   #define LAMP_PIN           4 // LED FloodLamp.
+  #define LAMP_PIN_DIG    true        
 
 #elif defined(CAMERA_MODEL_WROVER_KIT)
   //
